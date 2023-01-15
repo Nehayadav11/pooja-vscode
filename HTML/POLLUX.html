@@ -1,0 +1,99 @@
+<head>
+	<link rel="stylesheet" href="../CSS/pollux.css">
+	
+	<h1 class="member">Sign In</h1>
+	<div class="container">
+		<form>
+			<input type="text" name="username" placeholder="username" required="">
+			<input type="password" name="password" placeholder="password" required="">
+			<input type="password" name="repeat" placeholder="confirmPassword" required="">
+			<input type="email" name="email" placeholder="college email address" required="">
+			<select name="Graduation Year"   required="">
+				<option value="GraduationYear">Graduation Year</option>
+				<option value="GraduationYear">2026</option>
+				<option value="GraduationYear">2025</option>
+			<option value="GraduationYear">2024</option>
+			  </select>
+	
+			<p><input type="checkbox" name="remember" value="checked">Keep me logged in.</p><br />
+			<input type="submit" name="submit" value="Submit">
+			<input type="reset" name="reset" value="Reset"><br/>
+		</form>
+	</div>
+	</head>
+
+	<script type="module">
+
+		// Import the functions you need from the SDKs you need
+	  
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+	  
+		import { getAnalytics,set,ref } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+		
+		import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+	  
+		// TODO: Add SDKs for Firebase products that you want to use
+	  
+		// https://firebase.google.com/docs/web/setup#available-libraries
+	  
+	  
+		// Your web app's Firebase configuration
+	  
+		// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	  
+		const firebaseConfig = {
+	  
+		  apiKey: "AIzaSyBozO4E0Vtbj9sQB-5DnY-AiVUVW0ipzJI",
+	  
+		  authDomain: "pollux-d710e.firebaseapp.com",
+	  
+		  databaseURL: "https://pollux-d710e-default-rtdb.firebaseio.com",
+	  
+		  projectId: "pollux-d710e",
+	  
+		  storageBucket: "pollux-d710e.appspot.com",
+	  
+		  messagingSenderId: "229453575088",
+	  
+		  appId: "1:229453575088:web:f8bec1a51a0d8cf4931c75",
+	  
+		  measurementId: "G-9N07DPMR05"
+	  
+		};
+	  
+	  
+		// Initialize Firebase
+	  
+		const app = initializeApp(firebaseConfig);
+	  
+		const analytics = getAnalytics(app);
+
+signup.addeventlistener('click',(e)=> {
+
+	var email = document.getElementById('email').value;
+	var password = document.getElementById('password').value;
+	var username = document.getElementById('username').value;
+
+	createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in              
+	const user = userCredential.user;
+
+	set(ref(database, 'users/'+ user.uid)),{
+		username:username,
+		email:email
+	}
+	alert('user created');
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert('error message');
+	// ..
+  });
+})
+		
+	  
+	  </script>
+	
